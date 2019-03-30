@@ -1,0 +1,61 @@
+.loading {
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    z-index: 0;
+    width: 140px;
+    height: 140px;
+    margin-top: -70px;
+    margin-left: -70px;
+  
+    &-inner {
+      padding: 32px;
+      border-radius: 6px;
+      background-color: rgba(0, 0, 0, 0.7);
+  
+      .circular {
+        position: relative;
+        z-index: 0;
+        width: 100%;
+        height: 100%;
+        animation: svg-rotate 1.5s linear infinite;
+  
+        circle {
+          stroke: #fff;
+          stroke-width: 3;
+          stroke-linecap: round;
+          animation: circle-rotate 1.5s ease-in-out infinite;
+        }
+      }
+    }
+  
+    @keyframes svg-rotate {
+      from {
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+      }
+  
+      to {
+        -webkit-transform: rotate(360deg);
+        transform: rotate(360deg);
+      }
+    }
+  
+    @keyframes circle-rotate {
+      0% {
+        stroke-dasharray: 30, 200;
+        stroke-dashoffset: 0;
+      }
+  
+      50% {
+        stroke-dasharray: 90, 150;
+        stroke-dashoffset: -40;
+      }
+  
+      100% {
+        stroke-dasharray: 90, 150;
+        stroke-dashoffset: -120;
+      }
+    }
+  }
+  

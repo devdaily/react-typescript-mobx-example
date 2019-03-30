@@ -1,0 +1,74 @@
+@charset "utf-8";
+
+.flex {
+  display: flex;
+}
+
+.flex-center {
+  display: flex;
+  align-items: center;
+}
+
+.flex-between {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+@mixin _prefixDpr($width: 1px, $position: all, $color: #ddd, $radius: 0, $style: solid, $dpr: 2) {
+  @media only screen and (-webkit-min-device-pixel-ratio: $dpr) {
+    &:before {
+      content: ' ';
+      position: absolute;
+
+      @if $position==all {
+        left: 0;
+      }
+
+      @else if $position==top {
+        left: 0;
+      }
+
+      @else if $position==right {
+        right: 0;
+      }
+
+      @else if $position==bottom {
+        left: 0;
+        bottom: 0;
+      }
+
+      @else if $position==left {
+        left: 0;
+      }
+
+      top: 0;
+      box-sizing: border-box;
+      width: $dpr *100%;
+      height: $dpr *100%;
+      transform: scale(1/$dpr);
+      transform-origin: left top;
+
+      @if $position==all {
+        border: $width $style $color; /*no*/
+      }
+
+      @else {
+        border-#{$position}: $width $style $color; /*no*/
+      }
+
+      border-radius: $radius * 2; /*no*/
+      pointer-events: none;
+      z-index: 1;
+    }
+  }
+}
+
+@mixin border($position: all, $color: #ddd, $width: 1px, $radius: 0, $style: solid) {
+  position: relative;
+  border-radius: $radius; /*no*/
+  @include _prefixDpr($width, $position, $color, $radius, $style, 1);
+  @include _prefixDpr($width, $position, $color, $radius, $style, 1.5);
+  @include _prefixDpr($width, $position, $color, $radius, $style, 2);
+  @include _prefixDpr($width, $position, $color, $radius, $style, 3);
+}
